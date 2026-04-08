@@ -438,7 +438,7 @@ function submitForm(){
   const no=document.getElementById('notes').value;
   const sub=encodeURIComponent(`APG Quote Request – ${fn} ${ln}`);
   const bod=encodeURIComponent(`New Quote Request\n\nName: ${fn} ${ln}\nContact: ${ci}\nAddress: ${ad}\nProperty Type: ${pt}\nPlan: ${pl}\nNotes: ${no}`);
-  window.location.href=`mailto:advancedpropertygrounds@gmail.com?subject=${sub}&body=${bod}`;
+  window.location.href=`mailto:apg.ground@gmail.com?subject=${sub}&body=${bod}`;
   document.getElementById('successMsg').style.display='block';
   const btn=document.querySelector('.fsubmit');
   btn.textContent='✅ Request Sent!';

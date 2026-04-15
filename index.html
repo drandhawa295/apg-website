@@ -432,17 +432,24 @@ function submitForm(){
   const ci=document.getElementById('cinfo').value.trim();
   const ad=document.getElementById('addr').value.trim();
   if(!fn||!ci||!ad){alert('Please fill in your name, contact info, and address.');return;}
-  const ln=document.getElementById('lname').value;
-  const pt=document.getElementById('ptype').value||'Not specified';
-  const pl=document.getElementById('plan').value||'Not selected';
-  const no=document.getElementById('notes').value;
-  const sub=encodeURIComponent(`APG Quote Request – ${fn} ${ln}`);
-  const bod=encodeURIComponent(`New Quote Request\n\nName: ${fn} ${ln}\nContact: ${ci}\nAddress: ${ad}\nProperty Type: ${pt}\nPlan: ${pl}\nNotes: ${no}`);
-  window.location.href=`mailto:apg.ground@gmail.com?subject=${sub}&body=${bod}`;
-  document.getElementById('successMsg').style.display='block';
-  const btn=document.querySelector('.fsubmit');
-  btn.textContent='✅ Request Sent!';
-  btn.style.background='#4a9e4a';
+  const data={
+    name: fn + ' ' + document.getElementById('lname').value,
+    email: ci,
+    phone: ci,
+    address: ad,
+    plan: document.getElementById('plan').value||'Not selected',
+    notes: document.getElementById('notes').value
+  };
+  fetch('https://drand761.app.n8n.cloud/webhook/cdac90b0-554b-4d13-80e9-f0b79f5f465f',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).then(()=>{
+    document.getElementById('successMsg').style.display='block';
+    const btn=document.querySelector('.fsubmit');
+    btn.textContent='✅ Request Sent!';
+    btn.style.background='#4a9e4a';
+  }).catch(()=>alert('Something went wrong. Please call us at 587-890-8505.'));
 }
 </script>
 </body>
